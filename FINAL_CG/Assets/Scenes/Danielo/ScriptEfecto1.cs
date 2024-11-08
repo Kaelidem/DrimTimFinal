@@ -24,24 +24,36 @@ using UnityEngine.UI;
 
 public class SceneEffectController : MonoBehaviour
 {
-    public Button botonEf1;      // Botón para activar el efecto
+    public Button botonEf1;      // Botón para activar el primer efecto
+    //public Button botonEf2;      // Botón para activar el segundo efecto
+    //public Button botonEf3;      // Botón para activar el tercer efecto
     public Button botonPausa;    // Botón para pausar el efecto
     public Button botonPlay;     // Botón para reanudar el efecto
 
     private bool isPaused = false;
+    private string currentEffectScene = ""; // Variable para almacenar la escena cargada
 
     void Start()
     {
-        // Vincular botones
-        botonEf1.onClick.AddListener(LoadEffectScene);
+        // Vincular botones a sus métodos correspondientes
+        botonEf1.onClick.AddListener(() => LoadEffectScene("HexagonShield"));
+        //botonEf2.onClick.AddListener(() => LoadEffectScene("Escena de Isa"));
+        //botonEf3.onClick.AddListener(() => LoadEffectScene("Escena de Matt"));
         botonPausa.onClick.AddListener(PauseEffect);
         botonPlay.onClick.AddListener(ResumeEffect);
     }
 
-    void LoadEffectScene()
+    void LoadEffectScene(string sceneName)
     {
-        // Cargar la escena del efecto
-        SceneManager.LoadScene("HexagonShield", LoadSceneMode.Additive);
+        // Si ya hay una escena cargada, primero descargala
+        if (!string.IsNullOrEmpty(currentEffectScene))
+        {
+            UnloadEffectScene(currentEffectScene);
+        }
+
+        // Cargar la nueva escena del efecto
+        SceneManager.LoadScene(sceneName, LoadSceneMode.Additive);
+        currentEffectScene = sceneName;  // Actualizar la escena cargada
     }
 
     void PauseEffect()
@@ -64,9 +76,12 @@ public class SceneEffectController : MonoBehaviour
         }
     }
 
-    void UnloadEffectScene()
+    void UnloadEffectScene(string sceneName)
     {
         // Descargar la escena del efecto
-        SceneManager.UnloadSceneAsync("HexagonShield");
+        SceneManager.UnloadSceneAsync(sceneName);
+        currentEffectScene = "";  // Restablecer la escena cargada
     }
 }
+
+
