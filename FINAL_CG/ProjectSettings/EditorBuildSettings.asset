@@ -4,5 +4,12 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/Danielo/UIButtons.unity
+    guid: 17909d4912e4ce343a52a9c4f57092c5
+  - enabled: 1
+    path: Assets/Scenes/Kael/HexagonShield.unity
+    guid: f76ae97ce3e73054fa92a334e575de81
   m_configObjects: {}
+  m_UseUCBPForAssetBundles: 0
